@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Adherent;
 use App\Http\Controllers\Controller;
+use App\Utilisateur;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -18,14 +22,20 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers
+    {
+        logout as performLogout;
+    }
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        return @$_GET["redirect"] ?: route("root");
+    }
 
     /**
      * Create a new controller instance.
@@ -35,5 +45,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function logout(Request $request)
+    {
+        $this->performLogout($request);
+
+        session()->flash("loggedout", 1);
+        return redirect(@$_GET["redirect"] ?: route("root"));
     }
 }

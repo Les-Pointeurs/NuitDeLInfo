@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Utilisateur;
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -24,11 +25,14 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        return @$_GET["redirect"] ?: route("root");
+    }
 
     /**
      * Create a new controller instance.
@@ -46,27 +50,45 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data) {
+        return self::getValidator($data);
+    }
+
+    public static function validationRules()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return [
+            'email' => 'required|string|email|max:255|unique:' . (new Utilisateur)->getTable(),
+            'password' => 'required|string|min:8|confirmed',
+            'nom' => 'required|string|max:255'
+        ];
+    }
+
+    public static function validationMessages()
+    {
+        return [
+            "password.confirmed" => "Les mots de passe ne correspondent pas.",
+            "email.unique" => "Un compte avec cette adresse e-mail existe déjà.",
+            "email.email" => "L'adresse e-mail n'est pas valide."
+        ];
+    }
+
+    public static function getValidator(array $data)
+    {
+        return Validator::make($data, self::validationRules(), self::validationMessages());
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Utilisateur
      */
+
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return Utilisateur::create(array_merge($data, [
+            "mdp" => password_hash($data["password"], PASSWORD_DEFAULT),
+            "privileges" => Utilisateur::NORMAL
+        ]));
     }
 }

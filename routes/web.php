@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +10,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+include_once("auth.php");
+
+Route::get('/', "HomeController@index")->name("root");
+
+Route::get('/legal', function() {
+    return view("legal");
+})->name("legal");
+
+Route::group(['middleware' => 'auth'], function ()
+{
+    Route::prefix("/compte")->name("compte.")->group(function ()
+    {
+        Route::get('/', 'UtilisateurController@voirProfil')->name("view");
+        Route::patch('/', 'UtilisateurController@modifierProfil')->name("edit");
+    });
+
+//    Route::group(['middleware' => 'verified'], function()
+//    {
+
+//    });
 });
