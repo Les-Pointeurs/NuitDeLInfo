@@ -15,7 +15,8 @@
         "guzzlehttp/guzzle": "6.4.1",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "sofa/eloquence-mappable": "5.6"
+        "sofa/eloquence-mappable": "5.6",
+        "xethron/migrations-generator": "v2.0.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
