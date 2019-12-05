@@ -64,7 +64,7 @@ use Illuminate\Support\Facades\View;
             <ul class="navbar-nav mr-auto">
                 <?php
                 $liens = [
-                    "root" => ["Accueil", "home"]
+                    //"root" => ["Accueil", "home"]
                 ];
 
                 if (auth()->check())
