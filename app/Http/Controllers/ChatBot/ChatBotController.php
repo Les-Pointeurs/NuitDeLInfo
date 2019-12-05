@@ -48,7 +48,7 @@ class ChatBotController extends Controller
     private static function compareStrings($a, $b) {
         $reliance = 0;
 
-        for ($i = 0; $i < strlen($a); $i++) {
+        for ($i = 0; $i < min(strlen($a), strlen($b)); $i++) {
             if ($a[$i] === $b[$i])
                 $reliance++;
         }
