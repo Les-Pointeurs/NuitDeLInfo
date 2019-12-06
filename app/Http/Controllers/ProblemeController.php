@@ -27,4 +27,18 @@ class ProblemeController extends Controller
 
         return redirect(route("probleme.view", ["prob" => $prob]));
     }
+
+    public function creerEnvoyer()
+    {
+        $data = $this->validate(request(), [
+            "text" => "required|string"
+        ]);
+
+        $prob = new Probleme;
+        $prob->question = $data["text"];
+        $prob->utilisateur()->associate(auth()->user());
+        $prob->save();
+
+        return redirect(route("probleme.view", ["prob" => $prob]));
+    }
 }

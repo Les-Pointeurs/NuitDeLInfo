@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <h2 class="mb-3 title">Fil d'actualité</h2>
 
-        @foreach($problemes as $prob)
+        @foreach($problemes->sortByDesc("date") as $prob)
             <a href="{{route("probleme.view", ["prob" => $prob])}}" class="link-inherit">
                 <div class="card mb-3">
                     <div class="card-body">

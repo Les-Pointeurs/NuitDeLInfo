@@ -36,7 +36,9 @@ h2, .subtitle {
     border-width: 0 8px;
     border-style: solid;
     border-color: var(--c-pink);
+    width: var(--chat-width);
     min-width: var(--chat-width);
+    max-width: var(--chat-width);
 }
 
 .navbar {
@@ -213,4 +215,112 @@ h2, .subtitle {
     outline: none !important;
     border: none !important;
     background: none !important;
+}
+
+
+.incoming_msg_img {
+    display: inline-block;
+    width: 6%;
+}
+
+.incoming_msg_img img {
+    width: 100%;
+}
+
+.received_msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+}
+
+.received_withd_msg p {
+    background: #ebebeb none repeat scroll 0 0;
+    border-radius: 0 15px 15px 15px;
+    color: #646464;
+    font-size: 14px;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+.time_date {
+    color: #747474;
+    display: block;
+    font-size: 12px;
+    margin: 8px 0 0;
+}
+
+.received_withd_msg {
+    width: 57%;
+}
+
+.sent_msg p {
+    background:#0465ac;
+    border-radius: 12px 15px 15px 0;
+    font-size: 14px;
+    margin: 0;
+    color: #fff;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+.outgoing_msg {
+    overflow: hidden;
+    margin: 26px 0 26px;
+}
+
+.sent_msg {
+    float: right;
+    width: 46%;
+}
+
+.input_msg_write input {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #4c4c4c;
+    font-size: 15px;
+    min-height: 48px;
+    width: 100%;
+    outline:none;
+}
+
+.type_msg {
+    border-top: 1px solid #c4c4c4;
+    bottom: var(--footer-height);
+    width: calc(var(--chat-width) - 16px);
+    padding-left: 6px;
+    position: fixed;
+}
+
+.msg_send_btn {
+    background: #05728f none repeat scroll 0 0;
+    border:none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    height: 33px;
+    width: 33px;
+}
+
+.messaging {
+    padding: 0 0 50px 0;
+}
+
+.msg_history {
+    overflow-y: auto;
+    margin-top: auto;
+    margin-bottom: 60px;
+}
+
+.input_msg_write {
+    display: flex;
+    flex-direction: row;
+}
+
+.mesgs {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }

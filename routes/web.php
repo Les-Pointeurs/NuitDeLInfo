@@ -23,6 +23,7 @@ Route::get('/legal', function () {
 
 Route::prefix("/probleme")->name("probleme.")->group(function() {
     Route::get("/{prob}", 'ProblemeController@voir')->where("prob", "[0-9]+")->name("view");
+    Route::post("/creer", 'ProblemeController@creerEnvoyer')->name("create");
     Route::post("/{prob}/commentaire", 'ProblemeController@commentaire')->name("comment");
     Route::post("/{prob}/commentaire/{comm}/vote", 'CommentaireController@vote')->where("prob", "[0-9]+")->where("comm", "[0-9]+");
 });
