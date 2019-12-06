@@ -15,10 +15,14 @@ class ProblemeController extends Controller
 
     public function commentaire(Probleme $prob)
     {
+        $data = $this->validate(request(), [
+            "commentaire" => "required|string"
+        ]);
+
         $comm = new Commentaire;
         $comm->probleme()->associate($prob);
         $comm->utilisateur()->associate(auth()->user());
-        $comm->texte = request("commentaire");
+        $comm->texte = $data["commentaire"];
         $comm->save();
 
         return redirect(route("probleme.view", ["prob" => $prob]));

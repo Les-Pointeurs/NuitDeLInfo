@@ -195,7 +195,7 @@ h2, .subtitle {
     font-size: 28px;
 }
 
-.comm-votes > i:hover {
+.comm-votes button > i:hover, .comm-votes button > i.active {
     color: var(--c-pink);
 }
 
@@ -207,4 +207,10 @@ h2, .subtitle {
     width: 18px;
     padding-right: 10px;
     text-align: right;
+}
+
+.comm-votes button {
+    outline: none !important;
+    border: none !important;
+    background: none !important;
 }
