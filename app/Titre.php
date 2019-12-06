@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TypeNotification extends Model
+class Titre extends Model
 {
     public $timestamps = false;
 }
