@@ -4,6 +4,8 @@
 :root {
     --navbar-height: 66px;
     --footer-height: 66px;
+    --chat-width: 450px;
+    --comm-bar-height: 178px;
 }
 
 body {
@@ -26,12 +28,15 @@ h2, .subtitle {
 #page {
     padding-top: 15px;
     flex-grow: 1;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #chat {
     border-width: 0 8px;
     border-style: solid;
     border-color: var(--c-pink);
+    min-width: var(--chat-width);
 }
 
 .navbar {
@@ -146,6 +151,60 @@ h2, .subtitle {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.user-picture:hover {
+.user-picture-inline {
+    width: 48px;
+    height: 48px;
+}
+
+.user-picture:not(.user-picture-inline):hover {
     box-shadow: 0 0 4px rgba(0, 0, 0, 1);
+}
+
+.card {
+    border-color: var(--c-pink);
+}
+
+.link-inherit {
+    color: inherit !important;
+}
+
+#comm-bar {
+    position: fixed;
+    width: calc(100% - var(--chat-width));
+    border-top: 6px solid var(--c-pink);
+    bottom: var(--footer-height);
+    height: var(--comm-bar-height);
+}
+
+#comm-list {
+    overflow-y: scroll;
+    height: calc(100% - var(--comm-bar-height));
+}
+
+#comm-list-top {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+.comm-votes {
+    width: 40px;
+}
+
+.comm-votes > i {
+    font-size: 28px;
+}
+
+.comm-votes > i:hover {
+    color: var(--c-pink);
+}
+
+.comm-texte {
+    padding-left: 68px;
+}
+
+.comm-nvotes {
+    width: 18px;
+    padding-right: 10px;
+    text-align: right;
 }

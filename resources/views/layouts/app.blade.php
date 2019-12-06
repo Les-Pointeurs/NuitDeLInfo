@@ -122,6 +122,8 @@ use Illuminate\Support\Facades\View;
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <h6 class="dropdown-header">{{ Auth::user()->roleAffichage() }}</h6>
                             <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">{{ Auth::user()->points_confiance }} points de confiance</h6>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item pl-3" href="{{ route('compte.view') }}"><i
                                     class="mr-1 fas fa-user"></i> Mon compte</a>
                             <a class="dropdown-item pl-3" href="{{ route('logout') }}?redirect={{url()->current()}}"><i

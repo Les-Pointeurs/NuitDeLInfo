@@ -21,6 +21,11 @@ Route::get('/legal', function() {
     return view("legal");
 })->name("legal");
 
+Route::prefix("/probleme")->name("probleme.")->group(function() {
+    Route::get("/{prob}", 'ProblemeController@voir')->where("prob", "[0-9]+")->name("view");
+    Route::post("/{prob}/commentaire", 'ProblemeController@commentaire')->name("comment");
+});
+
 Route::group(['middleware' => 'auth'], function ()
 {
     Route::prefix("/compte")->name("compte.")->group(function ()
