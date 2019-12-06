@@ -23,6 +23,9 @@ class CreateUtilisateursTable extends Migration {
 			$table->text('nom');
 			$table->boolean('privileges');
 			$table->text('remember_token')->nullable();
+			$table->integer('role_id')->index('FK_utilisateurs_role');
+			$table->integer('points_confiance')->default(0);
+			$table->text('photo_url');
 		});
 	}
 
