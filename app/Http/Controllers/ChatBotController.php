@@ -58,8 +58,9 @@ class ChatBotController extends Controller
             $route = route("probleme.create");
             $csrf = csrf_field();
             $fid = sha1(time() . $csrf . $input);
-            $data = <<<eof
-Je suis désolé, je n'ai pas pu trouver de réponse à votre requête. Je vous conseille de 
+            $data = "Je suis désolé, je n'ai pas pu trouver de réponse à votre requête.";
+            $data .= <<<eof
+ Je vous conseille de 
 <form action="$route" method="post" name="form$fid">
 $csrf
 <input type="hidden" name="text" value="$input" />
