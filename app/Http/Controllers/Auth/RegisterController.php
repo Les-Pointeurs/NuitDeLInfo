@@ -88,7 +88,8 @@ class RegisterController extends Controller
     {
         return Utilisateur::create(array_merge($data, [
             "mdp" => password_hash($data["password"], PASSWORD_DEFAULT),
-            "privileges" => Utilisateur::NORMAL
+            "privileges" => Utilisateur::NORMAL,
+            "photo_url" => ""
         ]));
     }
 }
