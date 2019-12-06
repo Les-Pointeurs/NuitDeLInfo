@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\View;
 
 @section("fullTitle", config('app.name', 'N2I') . (View::hasSection("title") ? (" – " . htmlspecialchars_decode(View::getSection("title"), ENT_QUOTES | ENT_HTML5)) : ""))
 
-        <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -51,9 +51,9 @@ use Illuminate\Support\Facades\View;
 
 <div id="app">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="{{ route("root") }}">
-            <img src="{{asset("resources/assets/logo.png")}}" id="nav-logo" height="40" alt="Logo"/>
+            <img src="{{asset("images/logo_horiz.svg")}}" id="nav-logo" height="40" alt="Logo"/>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,8 @@ use Illuminate\Support\Facades\View;
                 ?>
                 <li class="nav-item {{is_active($url) ? "active" : ""}}">
                     <a class="nav-link" href="{{route($url).$get}}">@if($icon !== null) <i
-                                class="mr-1 fas fa-{{$icon}}"></i> @endif {!!$n!!} <?=is_active($url) ?
+                            class="mr-1 fas fa-{{$icon}}"></i> @endif <span
+                            class="h5">{!!$n!!}</span> <?=is_active($url) ?
                             '<span class="sr-only">(current)</span>' : ""?>
                     </a>
                 </li>
@@ -122,17 +123,22 @@ use Illuminate\Support\Facades\View;
                             <h6 class="dropdown-header">{{ Auth::user()->roleAffichage() }}</h6>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item pl-3" href="{{ route('compte.view') }}"><i
-                                        class="mr-1 fas fa-user"></i> Mon compte</a>
+                                    class="mr-1 fas fa-user"></i> Mon compte</a>
                             <a class="dropdown-item pl-3" href="{{ route('logout') }}?redirect={{url()->current()}}"><i
-                                        class="mr-1 fas fa-sign-out-alt"></i> Déconnexion</a>
+                                    class="mr-1 fas fa-sign-out-alt"></i> Déconnexion</a>
                         </div>
                     </li>
                 @endguest
             </ul>
         </div>
     </nav>
-    <div class="container-fluid" style="padding-top: 20px; padding-bottom: 15px">
-        @yield('content')
+    <div id="main-container">
+        <div id="page" class="container-fluid">
+            @yield('content')
+        </div>
+        <div id="chat">
+            @include("widgets.chat")
+        </div>
     </div>
     <div class="footer-spacer"></div>
     <footer class="footer">
