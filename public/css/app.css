@@ -138,3 +138,14 @@ h2, .subtitle {
     white-space: nowrap;
     max-width: calc(100% - 40px);
 }
+
+.user-picture {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.user-picture:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 1);
+}

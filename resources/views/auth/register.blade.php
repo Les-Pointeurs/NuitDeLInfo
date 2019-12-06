@@ -32,6 +32,12 @@ function old_($name)
                     @include("widgets.info", ["src" => "user"])
 
                     @if (isset($edit))
+                        <div class="form-group d-flex justify-content-center">
+                            <div class="user-picture d-flex flex-column justify-content-center ">
+                                <i class="fas fa-camera text-white h3"></i>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <input id="password_old" type="password"
                                    class="form-control{{ $errors->has('password_old') ? ' is-invalid' : '' }}"
