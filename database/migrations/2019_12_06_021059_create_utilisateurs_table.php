@@ -21,9 +21,8 @@ class CreateUtilisateursTable extends Migration {
 			$table->dateTime('date_modification')->default('0000-00-00 00:00:00');
 			$table->dateTime('date_verification')->nullable();
 			$table->text('nom');
-			$table->boolean('privileges');
+			$table->smallInteger('privileges')->unsigned()->default(0);
 			$table->text('remember_token')->nullable();
-			$table->integer('role_id')->index('FK_utilisateurs_role');
 			$table->integer('points_confiance')->default(0);
 			$table->text('photo_url');
 		});
