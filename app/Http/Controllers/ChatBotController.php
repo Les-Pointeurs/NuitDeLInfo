@@ -18,7 +18,6 @@ class ChatBotController extends Controller
 
     public function get() {
         $input = request("input");
-        $data = "";
 
         /*
          * Keywords : list of regex
@@ -41,13 +40,15 @@ class ChatBotController extends Controller
                 if ($reli >= 0.8) break;
             }
         }
+
+        $data = [];
 /*
         // Try 100% match, then 80%, then 60%, then stop
         for($i = 1; $i > 0.6; $i-=0.2) { */
             foreach ($reliance as $key => $val) {
                 echo $key . " " . $val;
                 if ($val >= 0.8) {
-                    $data .= Reponse::find($key)->nom . " ";
+                    $data[] = Reponse::find($key)->nom . " ";
                 }
             }
         /*}*/
