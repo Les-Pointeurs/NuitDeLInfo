@@ -75,4 +75,15 @@ class Utilisateur extends Authenticatable implements MustVerifyEmail
     {
         return $this->mdp;
     }
+
+    public function getTitre()
+    {
+        foreach(Titre::all()->sortByDesc("seuil") as $t)
+        {
+            if ($this->points_confiance >= $t->seuil)
+                return $t;
+        }
+
+        return null;
+    }
 }
