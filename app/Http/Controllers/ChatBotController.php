@@ -5,12 +5,19 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Keyword;
+use App\Reponse;
 use App\Utilisateur;
 
 class ChatBotController extends Controller
 {
 
-    public function get($input) {
+    public function index() {
+        return view("chatbot");
+    }
+
+    public function get() {
+        $input = request("input");
         $data = "";
 
         /*
@@ -18,10 +25,7 @@ class ChatBotController extends Controller
          * Results: list of chatbot's answers
          */
 
-        // $keywords = ChatBotModel::keywords();
-        // $results = ChatBotModel::results($keywords);
-        $keywords = array();
-        $results = array();
+        $keywords = Keyword::all();
 
         $args = explode(" ", $input);
 
@@ -29,20 +33,29 @@ class ChatBotController extends Controller
 
         foreach ($args as $arg) {
             foreach ($keywords as $k) {
+                $reli = self::compareStrings($arg, $k->motcles);
+
                 // Key is what the regex stands for as result
-                $reliance[$results[$k]] = compareStrings($arg, $k);
+                $reliance[$k->reponse_id] = $reli;
+
+                if ($reli >= 0.8) break;
             }
         }
-
+/*
         // Try 100% match, then 80%, then 60%, then stop
-        for($i = 1; $i > 0.6; $i-=0.2) {
+        for($i = 1; $i > 0.6; $i-=0.2) { */
             foreach ($reliance as $key => $val) {
-                if ($val >= $i)
-                    $data .= $key;
+                echo $key . " " . $val;
+                if ($val >= 0.8) {
+                    $data .= Reponse::find($key)->nom . " ";
+                }
             }
-        }
+        /*}*/
 
-        view("chatbot", $data);
+        if (empty($data))
+            $data = "Aucun résultat.";
+
+        return $data;
     }
 
     private static function compareStrings($a, $b) {
@@ -53,7 +66,7 @@ class ChatBotController extends Controller
                 $reliance++;
         }
 
-        $reliance /= strlen($a);
+        $reliance /= max(strlen($a), strlen($b));
 
         return $reliance;
     }

@@ -17,14 +17,17 @@ include_once("auth.php");
 
 Route::get('/', "HomeController@index")->name("root");
 
-Route::get('/legal', function() {
+Route::get('/legal', function () {
     return view("legal");
 })->name("legal");
 
-Route::group(['middleware' => 'auth'], function ()
-{
-    Route::prefix("/compte")->name("compte.")->group(function ()
-    {
+Route::prefix("/chatbot")->name("chatbot.")->group(function () {
+    Route::get('/', "ChatBotController@index");
+    Route::get('/get', "ChatBotController@get")->name("get");
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::prefix("/compte")->name("compte.")->group(function () {
         Route::get('/', 'UtilisateurController@voirProfil')->name("view");
         Route::patch('/', 'UtilisateurController@modifierProfil')->name("edit");
     });
